@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <!-- <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+
+    <package name="default" namespace="/" extends="struts-default">
+
+        <default-action-ref name="index" />
+
+        <global-results>
+            <result name="error">/WEB-INF/jsp/error.jsp</result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+
+        <action name="index">
+            <result type="redirectAction">
+                <param name="actionName">HelloWorld</param>
+                <param name="namespace">/example</param>
+            </result>
+        </action>
+    </package>
+
+    <include file="example.xml"/> -->
+	<!-- 把常量开发模式struts.devMode的值设置为true,修改配置后可立即生效 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- package用来区分重名的情况，可以有多个package；namespace一般设置为模块名称 -->
+	
+	<package name="action" namespace="/action" extends="struts-default">
+		<!-- http://localhost:8080/struts203Action20181010/action/defineAction1.action -->
+		<!-- 第一种自定义Action的方法：当action标签中不写class属性指定action的类是，默认执行的类是：com.opensymphony.xwork2.ActionSupport -->
+        <action name="defineAction1" class="com.fpq.action.difineAction.MyAction1">
+        	<!-- 当result的name为success是也可将name省略不写 -->
+            <result name="success">
+				/DefineMyAction.jsp
+            </result>
+        </action>
+        
+        <!-- 第二种自定义Action的方法：通过实现Action接口（com.opensymphony.xwork2.Action）来自定义定义Action，http://localhost:8080/struts203Action20181010/action/defineAction2.action -->
+        <action name="defineAction2" class="com.fpq.action.difineAction.MyAction2">
+        	<!-- 当result的name为success是也可将name省略不写 -->
+            <result name="success">
+				/DefineMyAction.jsp
+            </result>
+        </action>
+        
+        <!-- 第三种自定义Action的方法：从ActionSupport（com.opensymphony.xwork2.ActionSupport）父类继承定义Action子类,http://localhost:8080/struts203Action20181010/action/defineAction3.action -->
+        <action name="defineAction3" class="com.fpq.action.difineAction.MyAction3">
+        	<!-- 当result的name为success是也可将name省略不写 -->
+            <result name="success">
+				/DefineMyAction.jsp
+            </result>
+        </action>
+        
+    </package>
+	
+	
+	<package name="front" namespace="/front" extends="struts-default">
+		<!-- 添加url：http://localhost:8080/struts203Action20181010/front/testNamespace.action映射到Namespace.jsp页面 -->
+        <!-- 当action标签中不写class属性指定action的类是，默认执行的类是：com.opensymphony.xwork2.ActionSupport -->
+        <action name="testNamespace">
+        	<!-- 当result的name为success是也可将name省略不写 -->
+            <result name="success">
+				/Namespace.jsp
+            </result>
+        </action>
+    </package>
+    
+    <!-- namespace默认值为空"",为空时，只有url中包含index就和映射过来 ,其他namespase匹配不了的请求会映射过来-->
+    <package name="default" namespace="" extends="struts-default">
+		<!-- 添加url：http://localhost:8080/struts203Action20181010/aaa/adsds/sssss/ddd/default.action映射到Hello.jsp页面 -->
+        <action name="default">
+        	<!-- 当result的name为success是也可将name省略不写 -->
+            <result name="success">
+				/Hello.jsp
+            </result>
+        </action>
+    </package>
+    <!-- Add packages here -->
+
+</struts>

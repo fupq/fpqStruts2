@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="#{" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="#{"/>
+			<item value="/user_login_success.jsp"/>
+			<item value="&lt;result&gt;"/>
+			<item value=" result的类型：默认类型是di"/>
+			<item value="default"/>
+			<item value="a1"/>
+			<item value="s1"/>
+			<item value="user_login_success"/>
+			<item value="struts205ActionMethod20181012"/>
+			<item value="User_delete_Success"/>
+			<item value="User_add_Success"/>
+			<item value="!"/>
+			<item value="user_delete_success"/>
+			<item value="user_add_success"/>
+			<item value="user_add_success.jsp"/>
+		</list>
+		<list key="replacehistory">
+			<item value="struts206DataCheck20181016"/>
+			<item value="UserDeleteSuccess"/>
+			<item value="UserAddSuccess.jsp"/>
+			<item value="User_delete_Success"/>
+			<item value="User_add_Success"/>
+			<item value="struts205ActionMethod20181012"/>
+			<item value="struts2Study20181009"/>
+			<item value="struts202Namespace20181010"/>
+			<item value="struts204Path20181011"/>
+			<item value="struts203Action20181010"/>
+			<item value="struts2Namespace20181010"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="300" key="DIALOG_WIDTH"/>
+		<item value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI" key="DIALOG_FONT_NAME"/>
+		<item value="410" key="DIALOG_HEIGHT"/>
+		<item value="47" key="DIALOG_X_ORIGIN"/>
+		<item value="210" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

@@ -1,0 +1,114 @@
+<%@ page language="java" contentType="text/html; charset=GB18030"
+    pageEncoding="GB18030"%>
+    <%@taglib uri="/struts-tags" prefix="s" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="GB18030">
+<title>标签语法文档</title>
+</head>
+<body>
+	<h1>标签语法</h1>	<br>
+	<h2>创建动态输入字段</h2> <br>
+	标签用于显示动态数据。要创建显示属性“postalCode”的输入字段，我们将字符串“postalCode”传递给textfield标记。<br>
+	eg:<s:textfield name="postalCode"/>	<br>
+	如果值堆栈上有“postalCode”属性，则其值将设置为输入字段。当字段提交回框架时，控件的值将被设置回“postalCode”属性。<br>
+	
+	<h2>使用表达式设置标签</h2>
+	有时，我们希望将动态数据传递给标记。例如，我们可能希望显示带有输入字段的标签，我们可能希望从应用程序的消息资源中获取标签。因此，框架将解析标记属性中的表达式，以便我们可以在运行时将动态数据合并到标记属性中。表达式转义序列是“％{...}”。嵌入在转义序列中的任何文本都将作为表达式进行评估。<br>
+	eg:<s:textfield key="postalCode.label" name="postalCode"/> <br>
+	表达式语言（OGNL）允许我们调用方法并评估属性。该方法getText由ActionSupport提供，它是大多数Actions的基类。由于Action在堆栈上，我们可以从表达式调用它的任何方法，包括getText。 <br>
+	
+	
+	<h1>非字符串属性</h1> <br>
+	HTTP协议是基于文本的，但某些标签具有非String属性类型，如bool或int。为了使非String属性具有直观性，框架将所有非String属性作为表达式进行评估。在这种情况下，您不需要使用转义符号。（但是，如果你做了，框架将把它剥离。） <br>
+	<h2>评估布尔值</h2> <br>
+	eg:<s:select list="{'true','false'}"  key="state.label" name="state" multiple="true"  /> <br>
+	由于该属性multiple映射到布尔属性，因此框架不会将该值解释为String。该值被计算为表达式并自动转换为布尔值。<br>
+	由于很容易忘记哪些属性是String而哪些属性是非String，因此您仍然可以使用转义符号。<br>
+	<h2>Evaluating booleans (verbose):评估布尔（冗长）</h2> <br>
+	eg:<s:select list="{'true','false'}" key="state.label" name="state" multiple="%{true}"/> <br>
+	<h2>Evaluating booleans (with property):评估布尔（有属性）</h2> <br>
+	eg：<s:select list="{'fupinxin','wangshuhua','fukexiang'}" key="state.label" name="state" multiple="allowMultiple"/> <br>
+	<h2>Evaluating booleans (verbose with property):评估布尔值（详见属性）</h2> <br>
+	eg:<s:select list="{'fupinxin','wangshuhua','fukexiang'}" key="state.label" name="state" multiple="%{allowMultiple}"/> <br>
+	
+	
+	<h1>value 是一个对象！</h1> <br>
+	大多数情况下，value属性是自动设置的，因为name属性通常会告诉框架要调用哪个属性来设置value。但是，如果有理由value直接设置，请注意value 对象 不是 字符串。<br>
+	由于value不是String，因此传递给value它的任何内容都被计算为表达式 - 而不是字符串文字。 <br>
+	可能是错的！:<s:textfield key="state.label" name="state" value="ca"/>	<br>
+	如果a textfield传递了value属性"ca"，框架将查找名为的属性getCa。一般来说，这不是我们的意思。我们要做的是传递一个文字字符串。在表达式语言中，文字放在引号内<br>
+	以正确的方式传递文字值:<s:textfield key="state.label" name="state" value="%{'ca'}" /> <br>
+	另一种方法是使用成语value="'ca'"，但在这种情况下，建议使用表达式表示法。<br>
+	简化，使用三个规则评估标记属性。<br>
+
+	1.解析所有String属性类型的“％{...}”表示法。<br>
+	2.不解析所有非String属性类型，而是直接作为表达式求值 <br>
+	3.规则＃2的例外情况是，如果非String属性使用转义概念“％{}”，则符号将被忽略为冗余，并评估内容。<br>
+	
+	请记住altTeyntax选项，当值被评估为表达式时可以更改 - Alt语法<br>
+	<h2>表达式语言符号</h2>
+	Freemarker，Velocity或JSTL EL（非OGNL）中标准上下文中的JavaBean对象。: <p>Username: ${user.username}</p>  <br>
+	值栈上的用户名属性。:<s:textfield name="username"/> <br>
+	另一种引用置于价值堆栈上的属性的方法。:
+	<s:url id="es" action="Hello">
+	<s:param name="request_locale">
+	  es
+	</s:param>
+	</s:url>
+	<s:a href="%{es}">Espanol</s:a> <br>
+	Session对象中User对象的username属性。:<s:property value="#session.user.username" />
+	静态地图，如put（“用户名”，“trillian”）。:<s:select label="FooBar" name="foo" list="#{'username':'trillian','username':'zaphod'}" />
+	
+	<h1>不允许使用属性名称</h1>
+	不允许使用以下属性名称：<br>
+	parameters	<br>
+    application	<br>
+    session	<br>
+    struts	<br>
+    request	<br>
+    servletRequest	<br>
+    servletResponse	<br>
+	<br> <br>
+	<table>
+		<tr>
+			<td>语法</td>
+			<td>含义</td>
+			<td>示例</td>
+		</tr>
+		<tr>
+			<td>if</td>
+			<td>执行基本条件流程。'if'标签可以单独使用，也可以跟零或更多'Else if'标签后跟零或一个'Else'标签。</td>
+			<td>
+				<s:if test="%{false}">
+				    <div>Will Not Be Executed</div>
+				</s:if>
+				<s:elseif test="%{true}">
+				    <div>Will Be Executed</div>
+				</s:elseif>
+				<s:else>
+				    <div>Will Not Be Executed</div>
+				</s:else>
+			</td>
+		</tr>
+	</table>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<br> <s:debug></s:debug> <br />
+</body>
+</html>

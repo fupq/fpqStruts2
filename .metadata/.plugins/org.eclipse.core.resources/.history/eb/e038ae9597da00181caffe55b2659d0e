@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=GB18030"
+    pageEncoding="GB18030"%>
+    <%@taglib uri="/struts-tags" prefix="s" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="GB18030">
+<title>带参数的结果集</title>
+</head>
+<body>
+	<h1>
+		一次访问对于服务端的多次forword跳转使用的是同一个valueStack；
+		对于客户端的redirect属于多次访问，服务端是多个valueStack,多个valueStack间需要值传递
+	</h1>
+	从actionContext中取参数r的值: <s:property value="#parameters.r"/>
+	<br>
+	jsp中的标签s:property value="#parameters.r"用于从actionContext中获取参r的值
+	strust.xml中/withParameter.jsp?r=${type},从valueStack中获取type属性的值
+</body>
+</html>

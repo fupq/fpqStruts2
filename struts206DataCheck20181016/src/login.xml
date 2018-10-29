@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="loginXml" namespace="/loginXml" extends="struts-default">
+		<!-- url：http://localhost:8080/struts206DataCheck20181016/loginXml/login0.action -->
+		<action name="login0" class="com.fpq.action.webElement.LoginAction0">
+        	<result name="login">
+				/login.jsp
+            </result>
+        </action>
+    </package>
+</struts>

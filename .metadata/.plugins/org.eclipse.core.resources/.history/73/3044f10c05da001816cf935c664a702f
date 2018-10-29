@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 把常量开发模式struts.devMode的值设置为true,修改配置后可立即生效 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 把login.xml文件包含到此xml文件中 -->
+	<include file="login.xml"></include>
+	
+	<!-- struts2中默认不允许使用DMI，打开struts2的DMI的开关 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+	
+	<!-- package用来区分重名的情况，可以有多个package；namespace一般设置为模块名称 -->
+	
+	<!-- 测试Action的result的类型 -->
+	<package name="resultType" namespace="/resultType" extends="struts-default">
+		<default-action-ref name="resultType"></default-action-ref>
+		<!-- global Result -->
+		<global-results>
+			<result name="mainPage">
+				/globalResult.jsp
+			</result>
+		</global-results>
+		
+		<!-- 添加url：http://localhost:8080/struts206DataCheck20181016/resultType/ResultType_execute.action -->
+        <action name="*_*" class="com.fpq.action.resultType.{1}Action" method="{2}">
+        	<!-- result的类型：默认类型是dispatcher(运用服务器跳转，跳转到jsp文件中) -->
+            <result type="dispatcher">
+				/resultType.jsp
+            </result>
+          
+            
+            <result name="dispatcher" type="dispatcher">
+            	/resultTypeDispatcher.jsp
+            </result>
+            <result name="redirect" type="redirect">
+				/resultTypeRedirect.jsp
+            </result>
+            <result name="chain" type="chain">
+				useChainToAction
+            </result>
+            <!-- http://localhost:8080/struts206DataCheck20181016/resultType/ResultType_redirectAtion.action -->
+            <result name="redirectAct" type="redirectAction">
+				<!-- useChainToAction -->
+				ResultType_redirect
+            </result>
+        </action>
+        <!-- 添加url：http://localhost:8080/struts206DataCheck20181016/resultType/useChainToAction.action -->
+        <action name="useChainToAction" class="com.fpq.action.resultType.ResultTypeActionDispatcher">
+        	<!-- result的类型：默认类型是dispatcher(运用服务器跳转，跳转到jsp文件中) -->
+            <result name="achain" type="dispatcher">
+				/resultTypeChain.jsp
+            </result>
+        </action>
+    </package>
+    
+	<!--     测试Action获取request,session,application的4种方法 -->
+    <package name="login" namespace="/login" extends="resultType">
+		<!-- 添加url：http://localhost:8080/struts206DataCheck20181016/login/login0.action -->
+        <action name="login*" class="com.fpq.action.webElement.LoginAction{1}">
+            <result>
+				/user_login_success.jsp
+            </result>
+            <result name="login">
+				/login.jsp
+            </result>
+        </action>
+        
+        <!-- 添加url：http://localhost:8080/struts206DataCheck20181016/login/packageGlobalType.action -->
+        <action name="packageGlobalType" class="com.fpq.action.webElement.LoginActionGlobalResult">
+        	<result>
+				/user_login_success.jsp
+            </result>
+            <result name="error">
+				/error.jsp
+            </result>
+        </action>
+        <!-- 添加url：http://localhost:8080/struts206DataCheck20181016/login/dynamicResultType.action -->
+        <action name="dynamicResultType" class="com.fpq.action.webElement.LoginActionDynamicResultType">
+        	<result name="dynamicResultType">
+				${r}
+            </result>
+        </action>
+    </package>
+	
+	<package name="attrParamInput" namespace="/attrParamInput" extends="struts-default">
+		<!-- 添加url：http://localhost:8080/struts206DataCheck20181016/attrParamInput/User_add.action?name=carson&age=5 -->
+        <action name="*_*" class="com.fpq.action.attrParamInput.{1}Action" method="{2}">
+            <result>
+				/{1}_{2}_ok.jsp
+            </result>
+            <result name="error">
+            	/{1}_{2}_error.jsp
+            </result>
+        </action>
+    </package>
+	
+	<package name="actions" namespace="/actions" extends="struts-default">
+		<!-- 添加学生：http://localhost:8080/struts206DataCheck20181016/actions/Student_add.action -->
+        <!-- 删除学生：http://localhost:8080/struts206DataCheck20181016/actions/Student_delete.action -->
+        <!-- 添加老师：http://localhost:8080/struts206DataCheck20181016/actions/Teacher_add.action -->
+		<!-- 删除老师：http://localhost:8080/struts206DataCheck20181016/actions/Teacher_delete.action -->
+        <!-- 添加课程：http://localhost:8080/struts206DataCheck20181016/actions/Course_add.action -->
+        <!-- 删除课程：http://localhost:8080/struts206DataCheck20181016/actions/Course_delete.action -->
+        <action name="*_*" class="com.fpq.action.wildcard.{1}Action" method="{2}">
+            <result>
+				/{1}_{2}_Success.jsp
+            </result>
+        </action>
+        
+        
+
+		<action name="Student_add" class="com.fpq.action.wildcard.StudentAction" method="add">
+            <result>
+				/wildcard_studentadd_Success.jsp
+            </result>
+        </action>
+        <action name="Student_delete" class="com.fpq.action.wildcard.StudentAction" method="delete">
+            <result>
+				/wildcard_studentdelete_Success.jsp
+            </result>
+        </action>
+        
+		<!-- 添加学生：http://localhost:8080/struts206DataCheck20181016/actions/Studentadd.action -->
+		<!-- 删除学生：http://localhost:8080/struts206DataCheck20181016/actions/Studentdelete.action -->
+		<!-- Studentadd匹配到Student*，该action中的mehod的值{1}匹配name中的第一个* -->
+        <action name="Student*" class="com.fpq.action.wildcard.StudentAction" method="{1}">
+            <result>
+				/wildcard_student{1}_Success.jsp
+            </result>
+        </action>
+        
+        
+    </package>
+	
+	
+	<package name="user" namespace="/user" extends="struts-default">
+		<!-- 添加url：http://localhost:8080/struts206DataCheck20181016/user/userAdd.action -->
+        <!-- 执行类com.fpq.action.actionMethod.UserAction中的add方法,产生太多的action,不推荐使用 -->
+        <action name="userAdd" class="com.fpq.action.actionMethod.UserAction"  method="add">
+            <result>/UserAddSuccess.jsp.jsp</result>
+        </action>
+        
+        <!-- 执行类com.fpq.action.actionMethod.UserAction中的execute方法,http://localhost:8080/struts206DataCheck20181016/user/user!add-->
+        <action name="user" class="com.fpq.action.actionMethod.UserAction">
+        	<result>/user_action_method.jsp</result>
+        	<result name="delete">/UserDeleteSuccess.jsp</result>
+        	<result name="add">/UserAddSuccess.jsp.jsp</result>
+        </action>
+    </package>
+	
+	<package name="path" namespace="/path" extends="struts-default">
+		<!-- 添加url：http://localhost:8080/struts206DataCheck20181016/path/path.action -->
+        <!-- 当action标签中不写class属性指定action的类是，默认执行的类是：com.opensymphony.xwork2.ActionSupport -->
+        <action name="path" class="com.fpq.action.pathAction.PathAction">
+        	<!-- 当result的name为success是也可将name省略不写 -->
+        	<!-- 返回path,到struts.xml文件action标签里的result标签中查询name为path的result来显示其jsp -->
+            <result name="path">
+				/path.jsp
+            </result>
+        </action>
+    </package>
+	
+	<package name="action" namespace="/action" extends="struts-default">
+		<!-- 当http://localhost:8080/struts206DataCheck20181016/action/下找不到action时默认调用login0 -->
+		<default-action-ref name="defineAction1"></default-action-ref>
+		<!-- http://localhost:8080/struts206DataCheck20181016/action/defineAction1.action -->
+		<!-- 第一种自定义Action的方法：当action标签中不写class属性指定action的类是，默认执行的类是：com.opensymphony.xwork2.ActionSupport -->
+        <action name="defineAction1" class="com.fpq.action.difineAction.MyAction1">
+        	<!-- 当result的name为success是也可将name省略不写 -->
+            <result name="success">
+				/DefineMyAction.jsp
+            </result>
+        </action>
+        
+        <!-- 第二种自定义Action的方法：通过实现Action接口（com.opensymphony.xwork2.Action）来自定义定义Action，http://localhost:8080/struts206DataCheck20181016/action/defineAction2.action -->
+        <action name="defineAction2" class="com.fpq.action.difineAction.MyAction2">
+        	<!-- 当result的name为success是也可将name省略不写 -->
+            <result name="success">
+				/DefineMyAction.jsp
+            </result>
+        </action>
+        
+        <!-- 第三种自定义Action的方法：从ActionSupport（com.opensymphony.xwork2.ActionSupport）父类继承定义Action子类,http://localhost:8080/struts206DataCheck20181016/action/defineAction3.action -->
+        <action name="defineAction3" class="com.fpq.action.difineAction.MyAction3">
+        	<!-- 当result的name为success是也可将name省略不写 -->
+            <result name="success">
+				/DefineMyAction.jsp
+            </result>
+        </action>
+        
+    </package>
+	
+	
+	<package name="front" namespace="/front" extends="struts-default">
+		<!-- 添加url：http://localhost:8080/struts206DataCheck20181016/front/testNamespace.action映射到Namespace.jsp页面 -->
+        <!-- 当action标签中不写class属性指定action的类是，默认执行的类是：com.opensymphony.xwork2.ActionSupport -->
+        <action name="testNamespace">
+        	<!-- 当result的name为success是也可将name省略不写 -->
+            <result name="success">
+				/Namespace.jsp
+            </result>
+        </action>
+    </package>
+    
+    <!-- namespace默认值为空"",为空时，只有url中包含index就和映射过来 ,其他namespase匹配不了的请求会映射过来-->
+    <package name="default" namespace="" extends="struts-default">
+		<!-- 添加url：http://localhost:8080/struts206DataCheck20181016/aaa/adsds/sssss/ddd/default.action映射到Hello.jsp页面 -->
+        <action name="default">
+        	<!-- 当result的name为success是也可将name省略不写 -->
+            <result name="success">
+				/Hello.jsp
+            </result>
+        </action>
+    </package>
+    <!-- Add packages here -->
+
+</struts>

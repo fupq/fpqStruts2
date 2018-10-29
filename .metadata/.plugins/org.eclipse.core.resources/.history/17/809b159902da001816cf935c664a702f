@@ -1,0 +1,58 @@
+/**@Description:
+ * @Title:  LoginActionGlobalResult.java
+ * @Package com.fpq.action.webElement
+ * @author: 付品欣
+ * @date:   2018年10月27日 下午11:18:33
+ * @Copyright: 2018 com.fpq
+*/ 
+package com.fpq.action.webElement;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+/**@Description:TODO(这里用一句话描述这个类的作用)   
+ * @ClassName:  LoginActionGlobalResult   
+ * @author: 付品欣
+ * @date:   2018年10月27日 下午11:18:33   
+ *     
+ * @Copyright: 2018 com.fpq
+ * http://localhost:8080/struts206DataCheck20181016/login/packageGlobalType.action?type=3
+ */
+public class LoginActionDynamicResultType extends ActionSupport{
+
+	private int type;
+	
+	
+	
+	/**@Title:  getType <BR>  
+	 * @Description:  <BR>  
+	 * @return: int <BR>  
+	 */
+	public int getType() {
+		return type;
+	}
+
+
+
+	/**@Description: please write your description <BR>  
+	 * @Title:  setType <BR>  
+	 * @return: int <BR>  
+	 */
+	public void setType(int type) {
+		this.type = type;
+	}
+
+
+
+	public String execute() {
+		System.out.println("LoginActionGlobalResult类,globalResult:全局结果。同一个package内的多个action可共用，不同package中的action通过package的extends属性集成globalResult所在的package也可共用");
+		if(type == 1) {
+			System.out.println("type=1"); //http://localhost:8080/struts206DataCheck20181016/login/packageGlobalType.action?type=1
+			return SUCCESS;
+		}else if(type == 2){
+			System.out.println("type=2"); //http://localhost:8080/struts206DataCheck20181016/login/packageGlobalType.action?type=2
+			return "error";
+		}
+		System.out.println("type="+getType());
+		return "mainPage"; //http://localhost:8080/struts206DataCheck20181016/login/packageGlobalType.action?type=3
+	}
+}

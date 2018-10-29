@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=GB18030"
+    pageEncoding="GB18030"%>
+    <%@taglib uri="/struts-tags" prefix="s" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="GB18030">
+<title>标签语法文档</title>
+</head>
+<body>
+	<h1>标签语法</h1>
+	标签用于显示动态数据。要创建显示属性“postalCode”的输入字段，我们将字符串“postalCode”传递给textfield标记。<br>
+	eg:<s:textfield name="postalCode"/>	<br>
+	如果值堆栈上有“postalCode”属性，则其值将设置为输入字段。当字段提交回框架时，控件的值将被设置回“postalCode”属性。<br>
+	
+	
+	<br> <s:debug></s:debug> <br />
+</body>
+</html>

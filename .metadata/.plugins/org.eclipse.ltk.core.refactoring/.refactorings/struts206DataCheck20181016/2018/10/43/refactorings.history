@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;LoginActionGlobalResult.java&apos; to &apos;struts206DataCheck20181016/src/com.fpq.action.webElement&apos;&#x0D;&#x0A;- Original project: &apos;struts206DataCheck20181016&apos;&#x0D;&#x0A;- Destination element: &apos;struts206DataCheck20181016/src/com.fpq.action.webElement&apos;&#x0D;&#x0A;- Original element: &apos;com.fpq.action.webElement.LoginActionGlobalResult.java&apos;" description="Copy compilation unit" destination="/src&lt;com.fpq.action.webElement" element1="/src&lt;com.fpq.action.webElement{LoginActionGlobalResult.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1540656178248" units="1" version="1.0"/>
+</session>

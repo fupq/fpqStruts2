@@ -1,0 +1,59 @@
+/**@Description:
+ * @Title:  TagSyntaxAction.java
+ * @Package com.fpq.action.tag
+ * @author: 付品欣
+ * @date:   2018年10月28日 下午11:40:10
+ * @Copyright: 2018 com.fpq
+*/ 
+package com.fpq.action.tag;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+/**@Description:TODO(这里用一句话描述这个类的作用)   
+ * @ClassName:  TagSyntaxAction   
+ * @author: 付品欣
+ * @date:   2018年10月28日 下午11:40:10   
+ *     
+ * @Copyright: 2018 com.fpq
+ */
+public class TagSyntaxAction extends ActionSupport{
+
+	public String postalCode;
+	
+	
+	/**
+	 * @Description:
+	 * @Title: index 
+	 * @return  
+	 * @throws
+	 *  http://localhost:8080/struts206DataCheck20181016/tag/TagSyntax_index.action
+	 */
+	public String index() {
+		System.out.println("TagSyntaxAction:查看标签的语法文档！");
+		return SUCCESS;
+	}
+
+
+	/**@Title:  getPostalCode <BR>  
+	 * @Description:  <BR>  
+	 * @return: String <BR>  
+	 */
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+
+	/**@Description: please write your description <BR>  
+	 * @Title:  setPostalCode <BR>  
+	 * @return: String <BR>  
+	 */
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,76 @@
+/**@Description:
+ * @Title:  ResultTypeAction.java
+ * @Package com.fpq.action.resultType
+ * @author: 付品欣
+ * @date:   2018年10月20日 下午12:58:08
+ * @Copyright: 2018 com.fpq
+*/ 
+package com.fpq.action.resultType;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+/**@Description:TODO(这里用一句话描述这个类的作用)   
+ * @ClassName:  ResultTypeAction   
+ * @author: 付品欣
+ * @date:   2018年10月20日 下午12:58:08   
+ *     
+ * @Copyright: 2018 com.fpq
+ * http://localhost:8080/struts206DataCheck20181016/resultType/ResultType_execute.action
+ * 
+ */
+public class ResultTypeAction extends ActionSupport {
+
+	/**
+	 * <p>Title: execute</p>
+	 * <p>Description: </p>
+	 * @return
+	 * @see com.opensymphony.xwork2.ActionSupport#execute()
+	 * http://localhost:8080/struts206DataCheck20181016/resultType/ResultType_execute.action
+	 */
+	public String execute() {
+		System.out.println("ResultTypeAction:dispatcher:默认类型,运用服务器跳转，（只能）跳转到jsp页面，html页面，freemarker页面等页面	，常用");
+		return SUCCESS;
+	}
+	
+	/**
+	 * @Description:
+	 * @Title: dispatcher 
+	 * @return  
+	 * @throws
+	 * http://localhost:8080/struts206DataCheck20181016/resultType/ResultType_dispatcher.action
+	 */
+	public String dispatcher() {
+		System.out.println("ResultTypeAction:dispatcher:默认类型,运用服务器跳转，（只能）跳转到jsp页面，html页面，freemarker页面等页面	，常用");
+		return "dispatcher";
+	}
+	
+	/**
+	 * @Description:
+	 * @Title: redirect 
+	 * @return  
+	 * @throws
+	 * http://localhost:8080/struts206DataCheck20181016/resultType/ResultType_redirect.action
+	 */
+	public String redirect() {
+		System.out.println("ResultTypeAction:redirect：（只能）重定向到视图或页面,常用");
+		return "redirect";
+	}
+	
+	/**
+	 * @Description:
+	 * @Title: chain 
+	 * @return  
+	 * @throws
+	 * http://localhost:8080/struts206DataCheck20181016/resultType/ResultType_chain.action
+	 */
+	public String chain() {
+		System.out.println("chain:forward到一个action,不常用,跳转到ResultTypeActionDispatcher");
+		return "chain";
+	}
+	
+
+	public String redirectAtion() {
+		System.out.println("redirectAction：客户端跳转到一个Action,不常用");
+		return "chain";
+	}
+}

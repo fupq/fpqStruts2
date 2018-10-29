@@ -1,0 +1,13 @@
+<classpath>
+  <container id="struts203Action20181010!org.eclipse.jst.j2ee.internal.web.container">
+    <entry id="E:/struts/strutsWS/struts203Action20181010/WebRoot/WEB-INF/lib/xwork-core-2.3.20.3.jar">
+      <attribute name="source_encoding">UTF-8</attribute>
+    </entry>
+  </container>
+  <container id="struts2Study20181009!org.eclipse.jst.j2ee.internal.web.container">
+    <entry id="E:/struts/strutsWS/struts2Study20181009/WebRoot/WEB-INF/lib/struts2-core-2.3.20.3.jar">
+      <source-attachment-path>E:/struts/jar包下载/struts-2.3.20.3-all/struts-2.3.20.3/src/core/src/main/java</source-attachment-path>
+      <attribute name="source_encoding">UTF-8</attribute>
+    </entry>
+  </container>
+</classpath>
